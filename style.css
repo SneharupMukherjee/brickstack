@@ -205,13 +205,17 @@ canvas {
   width: fit-content;
 }
 
-
 .start-panel h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
   color: var(--primary);
   margin-bottom: 40px;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
 }
+
 
 .start-panel button {
   font-family: 'Press Start 2P', monospace;
