@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require("express");
 const axios = require("axios");
 
 const app = express();
 app.use(express.json());
 
-const TELEGRAM_TOKEN = "7332513827:AAF7X8SUfMfVYPePn44CZwVnCApOySHaKSw";
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
 
 // ✅ Hardcoded webhook route to avoid mismatch
@@ -16,9 +18,40 @@ app.post("/webhook", async (req, res) => {
   const text = message.text;
 
   if (text === "/start") {
+    const steps = [
+      "⚙️ Booting up BrickStack...",
+      "🔌 Connecting to game server...",
+      "📡 Syncing gameplay modules...",
+      "✅ Ready!"
+    ];
+  
+    const sentMessages = [];
+  
+    // Sequentially send progress messages
+    for (let i = 0; i < steps.length; i++) {
+      const sent = await axios.post(`${TELEGRAM_API}/sendMessage`, {
+        chat_id: chatId,
+        text: steps[i]
+      });
+  
+      sentMessages.push(sent.data.result.message_id);
+  
+      // Add delay between each message
+      await new Promise(resolve => setTimeout(resolve, 800));
+    }
+  
+    // Delete all progress messages
+    for (const msgId of sentMessages) {
+      await axios.post(`${TELEGRAM_API}/deleteMessage`, {
+        chat_id: chatId,
+        message_id: msgId
+      });
+    }
+  
+    // Send the actual game launch button
     await axios.post(`${TELEGRAM_API}/sendMessage`, {
       chat_id: chatId,
-      text: "🕹️ Welcome to BrickStack!\nTap below to play:",
+      text: "🕹️ BrickStack is live!\nTap below to play:",
       reply_markup: {
         inline_keyboard: [[
           {
@@ -28,7 +61,7 @@ app.post("/webhook", async (req, res) => {
         ]]
       }
     });
-  }
+  }  
 
   res.sendStatus(200);
 });
