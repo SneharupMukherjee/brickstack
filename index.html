@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrickStack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-wrapper">
+    <canvas id="bgCanvas"></canvas>
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Start Screen -->
+    <div id="startScreen">
+      <div class="start-panel">
+        <h1>BrickStack</h1>
+        <button onclick="startGame()">Start</button>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div id="countdownOverlay" class="hidden">
+      <div class="countdown-text" id="countdownText"></div>
+    </div>
+
+    <!-- Score & Width Overlay -->
+    <div id="scoreOverlay">Stack: 0</div>
+    <div id="widthOverlay">Percentage: 100%</div>
+
+    <!-- Game Over Popup -->
+    <div id="gameOverScreen" class="hidden">
+      <div class="popup">
+        <h1>Game Over</h1>
+        <hr />
+        <div class="score-line">
+          <span>Final Stack:</span>
+          <span id="finalStack">0</span>
+        </div>
+        <div class="score-line">
+          <span>Final %:</span>
+          <span id="finalPercent">0%</span>
+        </div>
+        <hr />
+        <button onclick="restartGame()">Restart</button>
+      </div>
+    </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
