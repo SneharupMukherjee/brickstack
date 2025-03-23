@@ -58,7 +58,7 @@ const blockWidth = 130;
 const originalBlockWidth = blockWidth;
 const bottomPadding = 100;
 const SCROLL_START_BLOCK = 8;
-let speed = 10;
+let speed = 7;
 
 let stack = [];
 let isDropping = false;
