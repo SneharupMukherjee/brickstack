@@ -7,7 +7,8 @@ app.use(express.json());
 const TELEGRAM_TOKEN = "7332513827:AAF7X8SUfMfVYPePn44CZwVnCApOySHaKSw";
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
 
-app.post(`/webhook/${TELEGRAM_TOKEN}`, async (req, res) => {
+// ✅ Hardcoded webhook route to avoid mismatch
+app.post("/webhook", async (req, res) => {
   const message = req.body.message;
   if (!message || !message.text) return res.sendStatus(200);
 
