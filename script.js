@@ -1,3 +1,8 @@
+if (window.Telegram && window.Telegram.WebApp) {
+  window.Telegram.WebApp.expand(); // Makes it fullscreen
+  window.Telegram.WebApp.ready();  // Marks app as ready
+}
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
